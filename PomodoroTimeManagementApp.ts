@@ -1,5 +1,6 @@
 import {
     IAppAccessors,
+    IConfigurationExtend,
     IHttp,
     ILogger,
     IModify,
@@ -12,13 +13,15 @@ import { SlashCommandContext } from '@rocket.chat/apps-engine/definition/slashco
 import { PomodoroCommand } from './commands/PomodoroCommand';
 
 export class PomodoroTimeManagementApp extends App {
+    private readonly appLogger: ILogger //notsure
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
     }
 
-    public async initialize(): Promise<void> 
+    public async extendConfirguration(configuration: IConfigurationExtend): Promise<void> 
     {
-        console.log("Hello World!");
+        const pomodoroCommand: PomodoroCommand = new PomodoroCommand()
+        await configuration.slashCommands.provideSlashCommand(pomodoroCommand)
     }
 
     
