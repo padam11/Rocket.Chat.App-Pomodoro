@@ -17,7 +17,28 @@ export class PomodoroCommand implements ISlashCommand {
         modify: IModify,
         http: IHttp,
         persis: IPersistence
-    ): Promise<void> {}
+    ): Promise<void> {
+
+            let meetingUrl = 'https://pomofocus.io/';
+            const joinButton: IMessageAttachment = {
+                actions: [{
+                    type: MessageActionType.BUTTON,
+                    text: 'Start Timer',
+                    url: meetingUrl
+                }],
+            
+            };
+    
+            const builder = modify.getCreator().startMessage()
+                .setSender(context.getSender())
+                .setRoom(context.getRoom())
+                .setText('Start Timer')
+                .setAttachments([joinButton])
+            
+            await modify.getCreator().finish(builder);
+        }
+        
+    }
+    
 
     //public async executor. for message do modify.getCreator().startMessage
-}
