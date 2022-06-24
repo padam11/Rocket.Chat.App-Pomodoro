@@ -23,7 +23,7 @@ export class PomodoroTimeManagementApp extends App {
     public async extendConfiguration(configuration: IConfigurationExtend): Promise<void> 
     {
         const pomodoroCommand: PomodoroCommand = new PomodoroCommand()
-        await configuration.slashCommands.provideSlashCommand(new PomodoroCommand())
+        await configuration.slashCommands.provideSlashCommand(pomodoroCommand)
     }
 }
 
